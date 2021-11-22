@@ -1,3 +1,6 @@
+import UserModels from "../models/UserModels";
+
+
 export interface UserInterface {
     nome: String,
     sobrenome: String,
@@ -17,8 +20,12 @@ export interface EnderecoInterface {
 
 class UserService {
     
-    static async getUser() {
+    static async getUser(id: Number) {
+        const user = await UserModels.findByPk(id);
+        console.log("===================");
+        console.log(user);
 
+        return user;
     }
 
     static async changePassword() {

@@ -1,16 +1,16 @@
-import database from "../database";
 import UserModels from "../models/UserModels";
 import { UserInterface, EnderecoInterface } from "./User";
 
 import InvalidFieldsException from "../errors/InvalidFieldsException";
 import PasswordLengthException from "../errors/PasswordLengthException";
 
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
 import EmailInvalidException from "../errors/EmailInvalidException";
 import UserNotFoundException from "../errors/UserNotFoundException";
 import InvalidPasswordException from "../errors/InvalidPasswordException";
 import PasswordNotEqualsException from "../errors/PasswordNotEqualsException";
+
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 export default class AuthService {
 

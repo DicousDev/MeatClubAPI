@@ -17,11 +17,11 @@ export default class UserModels {
 
     static async findByPk(id: Number) {
         const pool = database.promise();
-        const [usuario]: any = <any> await pool.query('SELECT * FROM USUARIO WHERE `idusuario` = ?',
+        const [usuario]: any = <any> await pool.query("SELECT USUARIO.NOME, USUARIO.EMAIL, USUARIO.TELEFONE, ENDERECO.RUA, ENDERECO.BAIRRO, ENDERECO.CIDADE, ENDERECO.NUMERO FROM USUARIO INNER JOIN ENDERECO ON USUARIO.IDUSUARIO = ENDERECO.IDUSUARIO WHERE USUARIO.IDUSUARIO = ?",
             [id]
         )
 
-        return usuario;
+        return usuario.shift();
     }
 
     static async findUser(email: String) {
