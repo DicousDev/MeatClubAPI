@@ -14,3 +14,24 @@ export interface EnderecoInterface {
     bairro: String,
     cidade: String
 }
+
+class UserService {
+    
+    static async getUser() {
+
+    }
+
+    static async changePassword() {
+
+    }
+
+    static async changeAddress() {
+
+    }
+
+    static async autoDelete() {
+
+    }
+}
+
+export default UserService;

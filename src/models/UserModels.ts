@@ -15,6 +15,15 @@ export default class UserModels {
         return {usuario, endereco: enderecoUser};
     }
 
+    static async findByPk(id: Number) {
+        const pool = database.promise();
+        const [usuario]: any = <any> await pool.query('SELECT * FROM USUARIO WHERE `idusuario` = ?',
+            [id]
+        )
+
+        return usuario;
+    }
+
     static async findUser(email: String) {
         const pool = database.promise();
         const [usuario]: any[] = <any[]> await pool.query('SELECT * FROM USUARIO WHERE `email` = ?',

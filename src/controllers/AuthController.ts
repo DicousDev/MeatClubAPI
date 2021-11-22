@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import AuthService from "../services/AuthUser";
 
-import { UserInterface } from "../services/User";
+// import { UserInterface } from "../services/User";
 
 import InvalidFieldsException from "../errors/InvalidFieldsException";
 import InvalidPasswordException from "../errors/InvalidPasswordException";
@@ -11,6 +11,7 @@ import UserNotFoundException from "../errors/UserNotFoundException";
 import PasswordNotEqualsException from "../errors/PasswordNotEqualsException";
 
 class AuthController {
+    
     static async create(req: Request, res: Response) {
         const body = req.body;
 
