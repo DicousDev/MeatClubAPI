@@ -13,7 +13,6 @@ export default async function AuthUser(req: Request, res: Response, next: NextFu
 
     try {
         const secret = process.env.SECRET;
-        console.log(secret);
         const id = <any> await jwt.verify(token, secret);
         req.id = id.id.toString();
         return next();

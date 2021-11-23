@@ -17,7 +17,7 @@ export default class UserModels {
 
     static async findByPk(id: Number) {
         const pool = database.promise();
-        const [usuario]: any = <any> await pool.query("SELECT USUARIO.NOME, USUARIO.EMAIL, USUARIO.TELEFONE, ENDERECO.RUA, ENDERECO.BAIRRO, ENDERECO.CIDADE, ENDERECO.NUMERO FROM USUARIO INNER JOIN ENDERECO ON USUARIO.IDUSUARIO = ENDERECO.IDUSUARIO WHERE USUARIO.IDUSUARIO = ?",
+        const [usuario]: any = <any> await pool.query("SELECT USUARIO.NOME, USUARIO.EMAIL, USUARIO.SENHA, USUARIO.TELEFONE, ENDERECO.RUA, ENDERECO.BAIRRO, ENDERECO.CIDADE, ENDERECO.NUMERO FROM USUARIO INNER JOIN ENDERECO ON USUARIO.IDUSUARIO = ENDERECO.IDUSUARIO WHERE USUARIO.IDUSUARIO = ?",
             [id]
         )
 
@@ -40,5 +40,12 @@ export default class UserModels {
         )
 
         return usuario.length > 0;
+    }
+
+    static async changePassword(id: Number, senha: String) {
+        const pool = database.promise();
+        await pool.query('UPDATE USUARIO SET `SENHA` = ? WHERE `IDUSUARIO` = ?',
+            [senha, id]
+        )
     }
 }
