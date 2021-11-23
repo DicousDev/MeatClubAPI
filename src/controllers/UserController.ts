@@ -59,7 +59,20 @@ class UserController {
     }
 
     static async autoDelete(req: Request, res: Response) {
+        const id = Number(req.id);
 
+        try {
+            await UserService.autoDelete(id);
+            return res.status(200).json({message: "Usuário deletado com sucesso!"});
+        }
+        catch(error) {
+         
+            if(error instanceof UserNotFoundException) {
+                res.status(error.statusCode).json({message: error.message});
+            }
+
+            return res.status(500).json({message: "Erro de servidor. Tente novamente mais tarde!"});
+        }
     }
 }
 

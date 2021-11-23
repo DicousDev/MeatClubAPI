@@ -97,8 +97,15 @@ class UserService {
         await UserModels.changeAddress(id, rua || user.RUA, bairro || user.BAIRRO, cidade || user.CIDADE, numero || user.NUMERO);
     }
 
-    static async autoDelete() {
+    static async autoDelete(id: Number) {
         
+        const user = await UserModels.findByPk(id);
+
+        if(!user) {
+            throw new UserNotFoundException();
+        }
+
+        await UserModels.deleteUser(id);
     }
 }
 
