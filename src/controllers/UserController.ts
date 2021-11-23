@@ -32,7 +32,8 @@ class UserController {
         }
         catch(error) {
             if(error instanceof InvalidFieldsException || error instanceof PasswordNotEqualsException || 
-                error instanceof InvalidPasswordException || error instanceof PasswordLengthException) {
+                error instanceof InvalidPasswordException || error instanceof PasswordLengthException ||
+                error instanceof UserNotFoundException) {
                 return res.status(error.statusCode).json({message: error.message});
             }
 
@@ -41,7 +42,20 @@ class UserController {
     }
 
     static async changeAddress(req: Request, res: Response) {
+        const body: any = <any> req.body;
+        const id = Number(req.id);
 
+        try {
+            await UserService.changeAddress(id, body.rua || "", body.bairro || "", body.cidade || "", body.numero || "");
+            return res.status(200).json({message: "Endereço do usuário atualizado com sucesso!"});
+        }
+        catch(error) {
+            if(error instanceof UserNotFoundException) {
+                return res.status(error.statusCode).json({message: error.message});
+            }
+
+            return res.status(500).json({message: "Erro de servidor. Tente novamente mais tarde!"});
+        }
     }
 
     static async autoDelete(req: Request, res: Response) {

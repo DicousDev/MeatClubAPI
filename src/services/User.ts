@@ -66,6 +66,11 @@ class UserService {
         }
 
         const user = await UserModels.findByPk(id);
+
+        if(!user) {
+            throw new UserNotFoundException();
+        }
+
         const checkPassword = await bcrypt.compare(senhaAtual.toString(), user.SENHA);
 
         if(!checkPassword) {
@@ -81,12 +86,19 @@ class UserService {
         await UserModels.changePassword(id, senhaNova);
     }
 
-    static async changeAddress() {
+    static async changeAddress(id: Number, rua: String, bairro: String, cidade: String, numero: String) {
 
+        const user = await UserModels.findByPk(id);
+
+        if(!user) {
+            throw new UserNotFoundException();
+        }
+
+        await UserModels.changeAddress(id, rua || user.RUA, bairro || user.BAIRRO, cidade || user.CIDADE, numero || user.NUMERO);
     }
 
     static async autoDelete() {
-
+        
     }
 }
 

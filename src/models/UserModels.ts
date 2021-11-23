@@ -48,4 +48,11 @@ export default class UserModels {
             [senha, id]
         )
     }
+
+    static async changeAddress(id: Number, rua: String, bairro: String, cidade: String, numero: String) {
+        const pool = database.promise();
+        await pool.query('UPDATE ENDERECO SET `RUA` = ?, `BAIRRO` = ?, `CIDADE` = ?, `NUMERO` = ? WHERE `IDUSUARIO` = ?',
+            [rua, bairro, cidade, numero, id]
+        )
+    }
 }
