@@ -14,6 +14,10 @@ export default class UserModels {
             [endereco.rua, endereco.bairro, endereco.cidade, endereco.numero, usuario.insertId]
         )
 
+        await pool.query(`INSERT INTO CARRINHO(IDUSUARIO) VALUES(?)`,
+            [usuario.insertId]
+        )
+
         return {usuario, endereco: enderecoUser};
     }
 

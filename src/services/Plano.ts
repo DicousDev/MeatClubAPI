@@ -29,9 +29,6 @@ export default class PlanoService {
         }
         
         const plano = await PlanoModels.getById(id);
-        console.log("===============")
-        console.log(plano);
-        console.log("===============")
         if(!plano) {
             throw new PlanoNotExistsException();
         }
